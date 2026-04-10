@@ -1,0 +1,90 @@
+@page "{id}"
+@model Proyecto_Segundo_Parcial.Pages.Departamentos.DetailsModel
+@{
+    ViewData["Title"] = "Detalles del Departamento";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-lg overflow-hidden">
+                <div class="card-header bg-gradient bg-info text-white py-5">
+                    <h2 class="mb-0">
+                        <i class="fas fa-building me-3"></i>@Model.Departamento.Nombre
+                    </h2>
+                </div>
+
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-muted text-uppercase">
+                            <i class="fas fa-align-left me-2 text-info"></i>Descripción
+                        </h6>
+                        <p class="fs-6">@Model.Departamento.Descripcion</p>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-dollar-sign me-2 text-info"></i>Presupuesto Anual
+                            </h6>
+                            <p class="fs-6 text-success fw-bold">$@Model.Departamento.PresupuestoAnual.ToString("N2")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-users me-2 text-info"></i>Total de Empleados
+                            </h6>
+                            <p class="fs-6">@Model.Departamento.Empleados.Count</p>
+                        </div>
+                    </div>
+
+                    @if (Model.Departamento.Empleados.Count > 0)
+                    {
+                        <hr />
+                        <h6 class="fw-bold text-muted text-uppercase mb-3">
+                            <i class="fas fa-list me-2 text-info"></i>Empleados del Departamento
+                        </h6>
+                        <div class="list-group">
+                            @foreach (var empleado in Model.Departamento.Empleados.OrderBy(e => e.Nombre))
+                            {
+                                <a href="/Empleados/Details/@empleado.Id" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <h6 class="mb-1">@empleado.Nombre @empleado.Apellido</h6>
+                                        <span class="badge bg-primary">@empleado.Cargo</span>
+                                    </div>
+                                    <p class="mb-1">@empleado.Email</p>
+                                    <small class="text-muted">Ingreso: @empleado.FechaIngreso.ToString("dd/MM/yyyy")</small>
+                                </a>
+                            }
+                        </div>
+                    }
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+                        <a asp-page="Index" class="btn btn-lg btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Volver
+                        </a>
+                        <a asp-page="Edit" asp-route-id="@Model.Departamento.Id" class="btn btn-lg btn-warning text-dark">
+                            <i class="fas fa-edit me-2"></i>Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #0dcaf0 0%, #0ab5d8 100%);
+    }
+
+    .list-group-item {
+        transition: all 0.3s ease;
+    }
+
+    .list-group-item:hover {
+        background-color: rgba(13, 202, 240, 0.1);
+        transform: translateX(5px);
+    }
+</style>

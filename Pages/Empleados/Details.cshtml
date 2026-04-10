@@ -1,0 +1,152 @@
+@page "{id}"
+@model Proyecto_Segundo_Parcial.Pages.Empleados.DetailsModel
+@{
+    ViewData["Title"] = "Detalles del Empleado";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-lg overflow-hidden">
+                <div class="card-header bg-gradient bg-primary text-white py-5">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 class="mb-0">
+                                <i class="fas fa-user-circle me-3"></i>@Model.Empleado.Nombre @Model.Empleado.Apellido
+                            </h2>
+                            <small class="text-white-50">@Model.Empleado.Cargo</small>
+                        </div>
+                        <span class="badge bg-light text-primary fs-6">
+                            @switch (Model.Empleado.Estado)
+                            {
+                                case ProyectoSegundoParcial.Models.EstadoEmpleado.Activo:
+                                    <span class="badge bg-success">Activo</span>
+                                    break;
+                                case ProyectoSegundoParcial.Models.EstadoEmpleado.Inactivo:
+                                    <span class="badge bg-warning">Inactivo</span>
+                                    break;
+                                case ProyectoSegundoParcial.Models.EstadoEmpleado.LicenciaSinPago:
+                                    <span class="badge bg-secondary">Licencia</span>
+                                    break;
+                                case ProyectoSegundoParcial.Models.EstadoEmpleado.Despedido:
+                                    <span class="badge bg-danger">Despedido</span>
+                                    break;
+                            }
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card-body p-5">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-envelope me-2 text-primary"></i>Email
+                            </h6>
+                            <p class="fs-6">@Model.Empleado.Email</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-phone me-2 text-primary"></i>Teléfono
+                            </h6>
+                            <p class="fs-6">@Model.Empleado.Telefono</p>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-building me-2 text-primary"></i>Departamento
+                            </h6>
+                            <p class="fs-6">
+                                <span class="badge bg-info text-dark">@Model.Empleado.Departamento?.Nombre</span>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-calendar me-2 text-primary"></i>Fecha de Ingreso
+                            </h6>
+                            <p class="fs-6">@Model.Empleado.FechaIngreso.ToString("dd/MM/yyyy")</p>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-dollar-sign me-2 text-primary"></i>Salario Mensual
+                            </h6>
+                            <p class="fs-6">$@Model.Empleado.Salario.ToString("N2")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-history me-2 text-primary"></i>Última Actualización
+                            </h6>
+                            <p class="fs-6">@Model.Empleado.FechaActualizacion.ToString("dd/MM/yyyy HH:mm")</p>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Empleado.Observaciones))
+                    {
+                        <hr />
+                        <div>
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-sticky-note me-2 text-primary"></i>Observaciones
+                            </h6>
+                            <p class="fs-6">@Model.Empleado.Observaciones</p>
+                        </div>
+                    }
+
+                    @if (Model.Empleado.Consultas?.Count > 0)
+                    {
+                        <hr />
+                        <div>
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-comments me-2 text-primary"></i>Consultas Registradas
+                            </h6>
+                            <div class="list-group">
+                                @foreach (var consulta in Model.Empleado.Consultas.OrderByDescending(c => c.FechaCreacion).Take(5))
+                                {
+                                    <div class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">@consulta.Asunto</h6>
+                                            <span class="badge bg-secondary">@consulta.Estado</span>
+                                        </div>
+                                        <p class="mb-1">@consulta.Descripcion</p>
+                                        <small class="text-muted">@consulta.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</small>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+                        <a asp-page="Index" class="btn btn-lg btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Volver
+                        </a>
+                        <a asp-page="Edit" asp-route-id="@Model.Empleado.Id" class="btn btn-lg btn-warning text-dark">
+                            <i class="fas fa-edit me-2"></i>Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #0d6efd 0%, #0a4ed8 100%);
+    }
+
+    .list-group-item {
+        transition: all 0.3s ease;
+    }
+
+    .list-group-item:hover {
+        background-color: rgba(13, 110, 253, 0.1);
+        transform: translateX(5px);
+    }
+</style>

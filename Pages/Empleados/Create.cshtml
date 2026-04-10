@@ -1,0 +1,153 @@
+@page
+@model Proyecto_Segundo_Parcial.Pages.Empleados.CreateModel
+@{
+    ViewData["Title"] = "Crear Empleado";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-primary text-white py-4">
+                    <h2 class="mb-0">
+                        <i class="fas fa-user-plus me-2"></i>Crear Nuevo Empleado
+                    </h2>
+                </div>
+
+                <div class="card-body p-5">
+                    @if (!ModelState.IsValid && ModelState.ErrorCount > 0)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error en la validación:</strong>
+                            @foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <div>@error.ErrorMessage</div>
+                            }
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    <form method="post" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Empleado.Nombre" class="form-label fw-semibold">
+                                    <i class="fas fa-user me-2 text-primary"></i>Nombre
+                                </label>
+                                <input asp-for="Empleado.Nombre" class="form-control form-control-lg" 
+                                    placeholder="Ingrese el nombre" required />
+                                <span asp-validation-for="Empleado.Nombre" class="invalid-feedback d-block"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Empleado.Apellido" class="form-label fw-semibold">
+                                    <i class="fas fa-user me-2 text-primary"></i>Apellido
+                                </label>
+                                <input asp-for="Empleado.Apellido" class="form-control form-control-lg" 
+                                    placeholder="Ingrese el apellido" required />
+                                <span asp-validation-for="Empleado.Apellido" class="invalid-feedback d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Empleado.Email" class="form-label fw-semibold">
+                                    <i class="fas fa-envelope me-2 text-primary"></i>Email
+                                </label>
+                                <input asp-for="Empleado.Email" type="email" class="form-control form-control-lg" 
+                                    placeholder="correo@ejemplo.com" required />
+                                <span asp-validation-for="Empleado.Email" class="invalid-feedback d-block"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Empleado.Telefono" class="form-label fw-semibold">
+                                    <i class="fas fa-phone me-2 text-primary"></i>Teléfono
+                                </label>
+                                <input asp-for="Empleado.Telefono" type="text" class="form-control form-control-lg" 
+                                    placeholder="Ej: +1-234-567-8900 o 1234567890" required />
+                                <span asp-validation-for="Empleado.Telefono" class="invalid-feedback d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Empleado.Cargo" class="form-label fw-semibold">
+                                    <i class="fas fa-briefcase me-2 text-primary"></i>Cargo
+                                </label>
+                                <input asp-for="Empleado.Cargo" class="form-control form-control-lg" 
+                                    placeholder="Ej: Desarrollador Senior" required />
+                                <span asp-validation-for="Empleado.Cargo" class="invalid-feedback d-block"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Empleado.DepartamentoId" class="form-label fw-semibold">
+                                    <i class="fas fa-building me-2 text-primary"></i>Departamento
+                                </label>
+                                <select asp-for="Empleado.DepartamentoId" asp-items="@(new SelectList(Model.Departamentos, "Id", "Nombre"))" 
+                                    class="form-select form-select-lg" required>
+                                </select>
+                                <span asp-validation-for="Empleado.DepartamentoId" class="invalid-feedback d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Empleado.FechaIngreso" class="form-label fw-semibold">
+                                    <i class="fas fa-calendar me-2 text-primary"></i>Fecha de Ingreso
+                                </label>
+                                <input asp-for="Empleado.FechaIngreso" type="date" class="form-control form-control-lg" required />
+                                <span asp-validation-for="Empleado.FechaIngreso" class="invalid-feedback d-block"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Empleado.Salario" class="form-label fw-semibold">
+                                    <i class="fas fa-dollar-sign me-2 text-primary"></i>Salario
+                                </label>
+                                <input asp-for="Empleado.Salario" type="number" step="0.01" class="form-control form-control-lg" 
+                                    placeholder="0.00" />
+                                <span asp-validation-for="Empleado.Salario" class="invalid-feedback d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Empleado.Observaciones" class="form-label fw-semibold">
+                                <i class="fas fa-sticky-note me-2 text-primary"></i>Observaciones
+                            </label>
+                            <textarea asp-for="Empleado.Observaciones" class="form-control form-control-lg" 
+                                rows="3" placeholder="Notas adicionales..."></textarea>
+                            <span asp-validation-for="Empleado.Observaciones" class="invalid-feedback d-block"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+                            <a asp-page="Index" class="btn btn-lg btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-lg btn-primary">
+                                <i class="fas fa-save me-2"></i>Crear Empleado
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<style>
+    .form-control-lg:focus,
+    .form-select-lg:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2) !important;
+    }
+</style>

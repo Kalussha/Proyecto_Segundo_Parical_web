@@ -1,0 +1,52 @@
+@page "{id}"
+@model Proyecto_Segundo_Parcial.Pages.Departamentos.DeleteModel
+@{
+    ViewData["Title"] = "Eliminar Departamento";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0 border-danger rounded-lg">
+                <div class="card-header bg-danger text-white py-4">
+                    <h2 class="mb-0">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Confirmar Eliminación
+                    </h2>
+                </div>
+
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-building-slash fa-5x text-danger opacity-50"></i>
+                    </div>
+
+                    <h4 class="mb-3">¿Está seguro de eliminar este departamento?</h4>
+                    
+                    <div class="alert alert-warning mb-4">
+                        <p class="mb-1">
+                            <strong>Departamento:</strong> @Model.Departamento.Nombre
+                        </p>
+                        <p class="mb-0">
+                            <strong>Empleados vinculados:</strong> @Model.Departamento.Empleados.Count
+                        </p>
+                    </div>
+
+                    <p class="text-muted mb-4">
+                        Esta acción no se puede deshacer.
+                    </p>
+
+                    <form method="post" class="d-inline">
+                        <input type="hidden" asp-for="Departamento.Id" />
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <a asp-page="Index" class="btn btn-lg btn-secondary">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-lg btn-danger">
+                                <i class="fas fa-trash me-2"></i>Eliminar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

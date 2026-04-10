@@ -1,0 +1,112 @@
+@page "{id}"
+@model Proyecto_Segundo_Parcial.Pages.Consultas.DetailsModel
+@{
+    ViewData["Title"] = "Detalles de la Consulta";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-lg overflow-hidden">
+                <div class="card-header bg-gradient bg-info text-white py-5">
+                    <h2 class="mb-2">
+                        <i class="fas fa-comment-circle me-3"></i>@Model.Consulta.Asunto
+                    </h2>
+                    <div class="d-flex gap-2">
+                        @switch (Model.Consulta.Tipo)
+                        {
+                            case ProyectoSegundoParcial.Models.TipoConsulta.Alias:
+                                <span class="badge bg-light text-dark">Alias</span>
+                                break;
+                            case ProyectoSegundoParcial.Models.TipoConsulta.Consulta:
+                                <span class="badge bg-light text-dark">Consulta</span>
+                                break;
+                            case ProyectoSegundoParcial.Models.TipoConsulta.Actualizacion:
+                                <span class="badge bg-light text-dark">Actualización</span>
+                                break;
+                            case ProyectoSegundoParcial.Models.TipoConsulta.Otro:
+                                <span class="badge bg-light text-dark">Otro</span>
+                                break;
+                        }
+                        @switch (Model.Consulta.Estado)
+                        {
+                            case ProyectoSegundoParcial.Models.EstadoConsulta.Pendiente:
+                                <span class="badge bg-danger">Pendiente</span>
+                                break;
+                            case ProyectoSegundoParcial.Models.EstadoConsulta.EnProceso:
+                                <span class="badge bg-warning">En Proceso</span>
+                                break;
+                            case ProyectoSegundoParcial.Models.EstadoConsulta.Resuelta:
+                                <span class="badge bg-success">Resuelta</span>
+                                break;
+                            case ProyectoSegundoParcial.Models.EstadoConsulta.Cerrada:
+                                <span class="badge bg-secondary">Cerrada</span>
+                                break;
+                        }
+                    </div>
+                </div>
+
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-muted text-uppercase">
+                            <i class="fas fa-user me-2 text-info"></i>Empleado
+                        </h6>
+                        <p class="fs-6">@Model.Consulta.Empleado?.Nombre @Model.Consulta.Empleado?.Apellido</p>
+                    </div>
+
+                    <hr />
+
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-muted text-uppercase">
+                            <i class="fas fa-align-left me-2 text-info"></i>Descripción
+                        </h6>
+                        <p class="fs-6">@Model.Consulta.Descripcion</p>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Consulta.Respuesta))
+                    {
+                        <hr />
+                        <div class="mb-4 p-3 bg-light rounded">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-reply me-2 text-success"></i>Respuesta
+                            </h6>
+                            <p class="fs-6 mb-0">@Model.Consulta.Respuesta</p>
+                        </div>
+                    }
+
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-calendar me-2 text-info"></i>Fecha de Creación
+                            </h6>
+                            <p class="fs-6">@Model.Consulta.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-muted text-uppercase">
+                                <i class="fas fa-history me-2 text-info"></i>Última Actualización
+                            </h6>
+                            <p class="fs-6">@Model.Consulta.FechaActualizacion.ToString("dd/MM/yyyy HH:mm")</p>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+                        <a asp-page="Index" class="btn btn-lg btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Volver
+                        </a>
+                        <a asp-page="Edit" asp-route-id="@Model.Consulta.Id" class="btn btn-lg btn-warning text-dark">
+                            <i class="fas fa-edit me-2"></i>Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #0dcaf0 0%, #0ab5d8 100%);
+    }
+</style>
