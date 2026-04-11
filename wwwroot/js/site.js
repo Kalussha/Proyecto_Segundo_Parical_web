@@ -34,7 +34,7 @@ setTimeout(function() {
 window.onpageshow = function (event) {
     if (event.persisted) {
         setTimeout(function() {
-            $('#page-loader').fadeOut(10s00);
+            $('#page-loader').fadeOut(500);
         }, 400);
     }
 };
