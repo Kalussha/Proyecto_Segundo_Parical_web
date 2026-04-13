@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProyectoSegundoParcial.Services
 {
+    // Interfaz que define las operaciones de negocio (Altas, Bajas, Modificaciones y Consultas) para los Empleados.
     public interface IEmpleadoService
     {
         Task<List<Empleado>> ObtenerTodosAsync();
@@ -15,6 +16,7 @@ namespace ProyectoSegundoParcial.Services
         Task<List<Empleado>> ObtenerPorDepartamentoAsync(int departamentoId);
     }
 
+    // Implementación concreta del servicio de Empleados que utiliza Entity Framework Core para el acceso a datos.
     public class EmpleadoService : IEmpleadoService
     {
         private readonly ApplicationDbContext _context;

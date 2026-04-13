@@ -3,6 +3,8 @@ using ProyectoSegundoParcial.Models;
 
 namespace ProyectoSegundoParcial.Data
 {
+    // Contexto de la base de datos de la aplicación.
+    // Administra las conexiones a la base de datos SQL Server y mapea los modelos a tablas mediante Entity Framework.
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -14,6 +16,7 @@ namespace ProyectoSegundoParcial.Data
         public DbSet<Departamento> Departamentos { get; set; }
         public DbSet<Consulta> Consultas { get; set; }
 
+        // Configura el modelo y las relaciones usando Fluent API.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

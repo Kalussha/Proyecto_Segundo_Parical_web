@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace ProyectoSegundoParcial.Models
 {
+    // Modelo que representa la entidad Empleado dentro del sistema.
+    // Define las propiedades, validaciones y relaciones con el departamento.
     public class Empleado
     {
         public int Id { get; set; }
