@@ -1,0 +1,84 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset="utf-8">
+<title>Documentación de Desarrollo del Proyecto</title>
+<style>
+    body { font-family: Calibri, Arial, sans-serif; }
+    h1 { color: #2E74B5; }
+    h2 { color: #2E74B5; border-bottom: 1px solid #2E74B5; padding-bottom: 2px; }
+    ul { margin-top: 5px; }
+    li { margin-bottom: 5px; }
+</style>
+</head>
+<body>
+
+<h1>Documentación de Desarrollo del Proyecto</h1>
+
+<h2>1. Introducción</h2>
+<p>Este proyecto es una aplicación web desarrollada con el patrón <b>Razor Pages</b> utilizando <b>ASP.NET Core</b> (.NET 8 y C# 12). La finalidad principal de la aplicación es gestionar un sistema de <b>Consultas</b> o incidencias vinculadas a empleados.</p>
+
+<h2>2. Tecnologías y Herramientas Utilizadas</h2>
+<ul>
+    <li><b>Backend:</b> C# 12, .NET 8, ASP.NET Core.</li>
+    <li><b>Frontend:</b> Razor Pages (HTML, CSS integrado).</li>
+    <li><b>Diseño UI:</b> Bootstrap 5, FontAwesome (para iconos), CSS personalizado (con gradientes y sombras).</li>
+    <li><b>Control de Versiones:</b> Git y GitHub.</li>
+</ul>
+
+<h2>3. Arquitectura del Proyecto</h2>
+<p>El proyecto sigue la arquitectura por defecto de ASP.NET Core Razor Pages, separando la lógica de las vistas a través de archivos <code>PageModel</code> (<code>.cshtml.cs</code>) y la interfaz en archivos Razor (<code>.cshtml</code>).</p>
+
+<h3>Estructura Principal</h3>
+<ul>
+    <li><b>/Pages:</b> Contiene todas las páginas de la aplicación web.
+        <ul>
+            <li><b>/Shared:</b> Archivos compartidos como el diseño principal (<code>_Layout.cshtml</code>), donde se define la barra de navegación y los scripts globales.</li>
+            <li><b>/Consultas:</b> Módulo central de nuestra aplicación que contiene el CRUD de la entidad Consulta.
+                <ul>
+                    <li><code>Index.cshtml</code>: Listado de consultas.</li>
+                    <li><code>Create.cshtml</code>: Formulario para registrar una nueva consulta.</li>
+                    <li><code>Details.cshtml</code>: Vista detallada de una consulta con su información completa, estado y respuesta.</li>
+                    <li><code>Edit.cshtml</code>: Interfaz para actualizar los datos.</li>
+                    <li><code>Delete.cshtml</code>: Confirmación para eliminar el registro.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<h2>4. Modelos de Datos (Entidades)</h2>
+<p>La estructura reflejada en las vistas incluye las siguientes entidades principales:</p>
+
+<h3>Consulta</h3>
+<ul>
+    <li><b>Asunto:</b> Título breve.</li>
+    <li><b>Descripción:</b> Detalle del problema o consulta.</li>
+    <li><b>Tipo de Consulta:</b> Clasificado mediante un Enum (Alias, Consulta, Actualización, Otro).</li>
+    <li><b>Estado:</b> Seguimiento del ciclo de vida (Pendiente, En Proceso, Resuelta, Cerrada).</li>
+    <li><b>Respuesta:</b> Retroalimentación dada al empleado.</li>
+    <li><b>Fechas:</b> Fecha de Creación y Fecha de Actualización.</li>
+    <li><b>Relaciones:</b> Vinculado a un usuario de tipo Empleado.</li>
+</ul>
+
+<h3>Empleado</h3>
+<ul>
+    <li>Representa al usuario del sistema (identificado por Nombre y Apellido).</li>
+</ul>
+
+<h2>5. Diseño y Experiencia de Usuario (UX/UI)</h2>
+<ul>
+    <li><b>Responsive Design:</b> Gracias a las clases de grid de Bootstrap, la aplicación se adapta a diferentes tamaños de pantalla.</li>
+    <li><b>Indicadores visuales:</b> Se utilizan badges de Bootstrap para resaltar el tipo de consulta y su severidad o estado.</li>
+    <li><b>Detalles Visuales:</b> Las vistas implementan tarjetas (cards) con sombras y cabeceras con gradientes de color para ofrecer un aspecto moderno y limpio.</li>
+</ul>
+
+<h2>6. Flujo de Desarrollo Actual</h2>
+<ol>
+    <li><b>Creación de Modelos y Contexto de Datos:</b> Establecimiento de la base de datos y DbContext.</li>
+    <li><b>Scaffolding de Razor Pages:</b> Generación automática de vistas estándar.</li>
+    <li><b>Personalización del Frontend:</b> Mejora de los formularios y las vistas detalladas con HTML/CSS a medida, reemplazando la vista genérica por una interfaz amigable.</li>
+    <li><b>Control de Código Fuente (Git):</b> Versionado del código y sincronización con el repositorio remoto alojado en GitHub.</li>
+</ol>
+
+</body>
+</html>
