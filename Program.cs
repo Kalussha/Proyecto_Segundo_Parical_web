@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoSegundoParcial.Data;
 using ProyectoSegundoParcial.Services;
+using System.Text.Json.Serialization;
 
 // Punto de entrada principal de la aplicación.
 // Configura los servicios, la base de datos, la inyección de dependencias y el middleware.
@@ -8,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 // Agregar DbContext
 // Configuración de Entity Framework Core utilizando SQL Server.
